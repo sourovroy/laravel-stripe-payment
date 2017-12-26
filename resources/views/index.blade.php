@@ -16,10 +16,10 @@
 
 	<form action="/purchases" method="POST">
 		{{ csrf_field() }}
-		
+
 		<script
 			src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-			data-key="pk_test_oFHSMQx2cBWdJGi1a67014Fy"
+			data-key="{{ config('services.stripe.key') }}"
 			data-amount="2500"
 			data-name="Sourov Roy Checkout"
 			data-description="This crated for learning perpose only."

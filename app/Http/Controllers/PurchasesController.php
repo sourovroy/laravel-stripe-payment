@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Stripe\{Stripe, Customer, Charge};
+use Stripe\{Customer, Charge};
 
 class PurchasesController extends Controller
 {
@@ -12,10 +12,6 @@ class PurchasesController extends Controller
 	 */
     public function store(Request $request)
     {
-        //dd($request->all());
-
-        Stripe::setApiKey(config('services.stripe.secret'));
-
         $customer = Customer::create(array(
             'email' => $request->get('stripeEmail'),
             'source'  => $request->get('stripeToken')
@@ -27,8 +23,6 @@ class PurchasesController extends Controller
             'currency' => 'usd'
         ));
 
-        var_dump($charge);
-        echo '<h1>Successfully charged $25.00!</h1>';
-
+        response()->json($charge);
     }
 }

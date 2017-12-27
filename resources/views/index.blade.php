@@ -4,29 +4,29 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Laravel</title>
+    <title>Laravel Stripe Checkout</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet"></link>
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet"></link>
+
+    <script>
+        var Sourov = {
+            "stripeKey": "{{ config('services.stripe.key') }}"
+        };
+    </script>
 
 </head>
 <body>
-	
-	<h1>Stripe checkout</h1>
 
-	<h3>Amount: $25.00</h3>
+    <div id="app">
+        <checkout-form></checkout-form>
+    </div>
 
-	<form action="/purchases" method="POST">
-		{{ csrf_field() }}
+    <script src="//checkout.stripe.com/checkout.js"></script>
 
-		<script
-			src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-			data-key="{{ config('services.stripe.key') }}"
-			data-amount="2500"
-			data-name="Sourov Roy Checkout"
-			data-description="This crated for learning perpose only."
-			data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
-			data-locale="auto">
-		</script>
-	</form>
+    <script src="{{ asset('js/app.js') }}"></script>
 
 </body>
 </html>
